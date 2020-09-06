@@ -7,7 +7,9 @@ import com.epam.wilk.steps.PostSteps;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
@@ -25,8 +27,10 @@ public class PostIT extends BaseIT {
     @Autowired
     private PostEndpoint postEndpoint;
 
+
     @Test
-    public void verifyAllPosts() {
+    @DisplayName("Verify all posts")
+    public void verifyAllPosts(TestInfo testInfo) {
         var response = postEndpoint.getPosts();
 
         assertThat(response.getStatusCode())
@@ -38,7 +42,8 @@ public class PostIT extends BaseIT {
     }
 
     @Test
-    public void verifyPost() {
+    @DisplayName("Verify single post")
+    public void verifyPost(TestInfo testInfo) {
         var response = postEndpoint.getPost(TEST_POST_ID);
 
         assertThat(response.getStatusCode())
@@ -50,7 +55,8 @@ public class PostIT extends BaseIT {
     }
 
     @Test
-    public void verifyAddPost() {
+    @DisplayName("Verify adding post")
+    public void verifyAddPost(TestInfo testInfo) {
         var userId = 6;
         var testTitle = "test title";
         var testBody = "test body";
