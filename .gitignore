@@ -1,0 +1,7 @@
+.idea/
+*.iml
+target/
+hollow-producer/
+.allure/
+allure-results/
+.envrc
