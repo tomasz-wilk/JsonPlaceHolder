@@ -22,9 +22,9 @@ public class PostEndpoint {
     private TestProperties testProperties;
 
     private static String POST_URI = "posts/";
+    private static Gson GSON = new Gson();
 
     public Response getPost(int postId) {
-        testProperties.getBaseUrl();
         return given()
                 .get(POST_URI + postId)
                 .then()
@@ -46,10 +46,33 @@ public class PostEndpoint {
 
     public Response addPost(int userId, String title, String body) {
         var post = new Post(userId, title, body);
-        var requestBody = new Gson().toJson(post);
+        var requestBody = GSON.toJson(post);
         return given()
                 .body(requestBody)
                 .post(POST_URI)
+                .then()
+                .log()
+                .all()
+                .extract()
+                .response();
+    }
+
+    public Response updatePost(int id, int userId, String title, String body) {
+        var post = new Post(id, userId, title, body);
+        var requestBody = GSON.toJson(post);
+        return given()
+                .body(requestBody)
+                .put(POST_URI + id)
+                .then()
+                .log()
+                .all()
+                .extract()
+                .response();
+    }
+
+    public Response deletePost(int id) {
+        return given()
+                .delete(POST_URI + id)
                 .then()
                 .log()
                 .all()
