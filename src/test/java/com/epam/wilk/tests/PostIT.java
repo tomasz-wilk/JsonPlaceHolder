@@ -26,7 +26,6 @@ public class PostIT extends BaseIT {
     @Autowired
     private PostEndpoint postEndpoint;
 
-
     @Test
     @DisplayName("Verify all posts")
     public void verifyAllPosts() {

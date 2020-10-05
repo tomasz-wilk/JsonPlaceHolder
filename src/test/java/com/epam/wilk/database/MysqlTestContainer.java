@@ -32,7 +32,7 @@ public class MysqlTestContainer {
         try (Connection connection = mySQLContainer.createConnection("")) {
             Statement statement = connection.createStatement();
             String multiQuery = "DROP TABLE IF EXISTS bar; " +
-                    "CREATE TABLE bar (foo VARCHAR(20)); ";
+                    "CREATE TABLE bar (foo VARCHAR(100)); ";
             statement.execute(multiQuery);
         }
     }

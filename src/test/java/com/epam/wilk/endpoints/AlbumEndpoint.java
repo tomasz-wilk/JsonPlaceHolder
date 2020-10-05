@@ -1,23 +1,22 @@
 package com.epam.wilk.endpoints;
 
 import com.epam.wilk.configuration.TestProperties;
-import com.epam.wilk.models.Post;
+import com.epam.wilk.models.Album;
 import io.restassured.response.Response;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostEndpoint extends BaseEndpoint {
+public class AlbumEndpoint extends BaseEndpoint {
+    private static String ALBUM_URI = "albums/";
 
-    private static String POST_URI = "posts/";
-
-    public PostEndpoint(@NonNull TestProperties testProperties) {
+    public AlbumEndpoint(@NonNull TestProperties testProperties) {
         super(testProperties);
     }
 
-    public Response getPost(int postId) {
+    public Response getAlbum(int albumId) {
         return given()
-                .get(POST_URI + postId)
+                .get(ALBUM_URI + albumId)
                 .then()
                 .log()
                 .all()
@@ -25,9 +24,9 @@ public class PostEndpoint extends BaseEndpoint {
                 .response();
     }
 
-    public Response getPosts() {
+    public Response getAlbums() {
         return given()
-                .get(POST_URI)
+                .get(ALBUM_URI)
                 .then()
                 .log()
                 .all()
@@ -35,11 +34,11 @@ public class PostEndpoint extends BaseEndpoint {
                 .response();
     }
 
-    public Response addPost(int userId, String title, String body) {
-        var post = new Post(userId, title, body);
+    public Response addAlbum(int userId, String title, String body) {
+        var album = new Album(userId, title);
         return given()
-                .body(post)
-                .post(POST_URI)
+                .body(album)
+                .post(ALBUM_URI)
                 .then()
                 .log()
                 .all()
@@ -47,11 +46,11 @@ public class PostEndpoint extends BaseEndpoint {
                 .response();
     }
 
-    public Response updatePost(int id, int userId, String title, String body) {
-        var post = new Post(id, userId, title, body);
+    public Response updateAlbum(int id, int userId, String title, String body) {
+        var album = new Album(id, userId, title);
         return given()
-                .body(post)
-                .put(POST_URI + id)
+                .body(album)
+                .put(ALBUM_URI + id)
                 .then()
                 .log()
                 .all()
@@ -59,9 +58,9 @@ public class PostEndpoint extends BaseEndpoint {
                 .response();
     }
 
-    public Response deletePost(int id) {
+    public Response deleteAlbum(int id) {
         return given()
-                .delete(POST_URI + id)
+                .delete(ALBUM_URI + id)
                 .then()
                 .log()
                 .all()
