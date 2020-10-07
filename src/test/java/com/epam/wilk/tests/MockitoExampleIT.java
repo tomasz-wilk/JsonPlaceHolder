@@ -13,7 +13,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class MockIT extends BaseIT {
+public class MockitoExampleIT extends BaseIT {
     private static int TEST_POST_ID = 50;
 
     @Autowired
