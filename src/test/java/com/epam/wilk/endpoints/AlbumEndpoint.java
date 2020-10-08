@@ -2,14 +2,14 @@ package com.epam.wilk.endpoints;
 
 import com.epam.wilk.configuration.TestProperties;
 import com.epam.wilk.models.Album;
+import com.google.inject.Inject;
 import io.restassured.response.Response;
 import lombok.NonNull;
-import org.springframework.stereotype.Component;
 
-@Component
 public class AlbumEndpoint extends BaseEndpoint {
     private static String ALBUM_URI = "albums/";
 
+    @Inject
     public AlbumEndpoint(@NonNull TestProperties testProperties) {
         super(testProperties);
     }

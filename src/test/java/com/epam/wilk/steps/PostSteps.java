@@ -2,9 +2,7 @@ package com.epam.wilk.steps;
 
 import com.epam.wilk.models.Post;
 import org.assertj.core.api.SoftAssertions;
-import org.springframework.stereotype.Component;
 
-@Component
 public class PostSteps {
 
     public void verifyPost(Post actualPost, Integer id, Integer userId, String title, String body) {

@@ -3,11 +3,11 @@ package com.epam.wilk.tests;
 import com.epam.wilk.endpoints.PostEndpoint;
 import com.epam.wilk.mocks.MockedResponse;
 import com.epam.wilk.steps.PostSteps;
+import com.google.inject.Inject;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class MockitoExampleIT extends BaseIT {
     private static int TEST_POST_ID = 50;
 
-    @Autowired
+    @Inject
     private PostSteps postSteps;
 
     @Test

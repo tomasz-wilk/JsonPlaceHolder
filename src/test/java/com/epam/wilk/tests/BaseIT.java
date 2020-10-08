@@ -1,28 +1,38 @@
 package com.epam.wilk.tests;
 
+import com.epam.wilk.configuration.ConfigurationModule;
 import com.epam.wilk.database.MysqlTestContainer;
-import com.epam.wilk.configuration.TestConfiguration;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.netflix.governator.guice.LifecycleInjector;
+import com.netflix.governator.lifecycle.LifecycleManager;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.SQLException;
 
-@SpringBootTest
-@ContextConfiguration(classes = {TestConfiguration.class})
-@ExtendWith(SpringExtension.class)
 public class BaseIT {
 
-    @Autowired
+    @Inject
+    private LifecycleManager manager;
+
+    @Inject
     public MysqlTestContainer mysqlTestContainer;
+
+    @BeforeEach
+    public void setup() throws Exception{
+        Injector injector = LifecycleInjector.builder().withModules(new ConfigurationModule()).createInjector();
+        injector.injectMembers(this);
+        manager = injector.getInstance(LifecycleManager.class);
+        manager.start();
+    }
 
     @AfterEach
     public void printResults(TestInfo testInfo) throws SQLException {
         mysqlTestContainer.addResultToDatabase(testInfo.getDisplayName());
         mysqlTestContainer.printTestResults();
+        manager.close();
     }
 }

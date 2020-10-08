@@ -4,13 +4,13 @@ import com.epam.wilk.endpoints.AlbumEndpoint;
 import com.epam.wilk.models.Album;
 import com.epam.wilk.steps.AlbumSteps;
 import com.epam.wilk.utils.JsonConverter;
+import com.google.inject.Inject;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.stream.Stream;
 
@@ -20,10 +20,10 @@ public class AlbumIT extends BaseIT {
 
     private static int TEST_ALBUM_ID = 25;
 
-    @Autowired
+    @Inject
     private AlbumSteps albumSteps;
 
-    @Autowired
+    @Inject
     private AlbumEndpoint albumEndpoint;
 
     private static Stream<Arguments> testMetadata() {

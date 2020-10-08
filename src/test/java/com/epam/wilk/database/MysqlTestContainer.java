@@ -1,7 +1,7 @@
 package com.epam.wilk.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.testcontainers.containers.MySQLContainer;
 
 import javax.annotation.PostConstruct;
@@ -11,10 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@Component
+@Singleton
 public class MysqlTestContainer {
 
-    @Autowired
+    @Inject
     MySQLContainer mySQLContainer;
 
     private void startMysql() {
@@ -27,14 +27,14 @@ public class MysqlTestContainer {
     }
 
     @PostConstruct
-    public void initDatabase() throws SQLException {
+    public void initDatabase()   {
         startMysql();
         try (Connection connection = mySQLContainer.createConnection("")) {
             Statement statement = connection.createStatement();
             String multiQuery = "DROP TABLE IF EXISTS bar; " +
                     "CREATE TABLE bar (foo VARCHAR(100)); ";
             statement.execute(multiQuery);
-        }
+        } catch (SQLException ignored) {}
     }
 
     public void addResultToDatabase(String testName) throws SQLException {

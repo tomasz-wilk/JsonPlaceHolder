@@ -5,12 +5,13 @@ import com.epam.wilk.endpoints.PostEndpoint;
 import com.epam.wilk.models.Post;
 import com.epam.wilk.steps.PostSteps;
 import com.epam.wilk.utils.JsonConverter;
+import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,10 +21,10 @@ public class PostIT extends BaseIT {
 
     private static int TEST_POST_ID = 50;
 
-    @Autowired
+    @Inject
     private PostSteps postSteps;
 
-    @Autowired
+    @Inject
     private PostEndpoint postEndpoint;
 
     @Test
@@ -41,8 +42,9 @@ public class PostIT extends BaseIT {
 
     @Test
     @DisplayName("Verify single post")
-    public void verifyPost() {
+    public void verifyPost() throws SQLException {
         var response = postEndpoint.getPost(TEST_POST_ID);
+
 
         assertThat(response.getStatusCode())
                 .as("wrong status code")

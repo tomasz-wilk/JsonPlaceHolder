@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class BaseEndpoint {
+
     @NonNull
     private TestProperties testProperties;
 

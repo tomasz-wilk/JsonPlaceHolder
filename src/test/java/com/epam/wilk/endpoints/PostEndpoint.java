@@ -2,15 +2,15 @@ package com.epam.wilk.endpoints;
 
 import com.epam.wilk.configuration.TestProperties;
 import com.epam.wilk.models.Post;
+import com.google.inject.Inject;
 import io.restassured.response.Response;
 import lombok.NonNull;
-import org.springframework.stereotype.Component;
 
-@Component
 public class PostEndpoint extends BaseEndpoint {
 
     private static String POST_URI = "posts/";
 
+    @Inject
     public PostEndpoint(@NonNull TestProperties testProperties) {
         super(testProperties);
     }

@@ -13,7 +13,6 @@ import io.restassured.path.xml.config.XmlPathConfig;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import io.restassured.response.ValidatableResponse;
-import org.apache.http.HttpStatus;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -24,7 +23,7 @@ public class MockedResponse implements Response {
     int statusCode;
     ContentType contentType;
 
-    public MockedResponse(int statusCode, ContentType contentType){
+    public MockedResponse(int statusCode, ContentType contentType) {
         this.statusCode = statusCode;
         this.contentType = contentType;
     }
