@@ -4,6 +4,7 @@ import com.epam.wilk.endpoints.AlbumEndpoint;
 import com.epam.wilk.models.Album;
 import com.epam.wilk.steps.AlbumSteps;
 import com.epam.wilk.utils.JsonConverter;
+import io.qameta.allure.Description;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,7 @@ public class AlbumIT extends BaseIT {
 
     @Test
     @DisplayName("Verify single album")
+    @Description("Verify single album")
     public void verifyAlbum() {
         var response = albumEndpoint.getAlbum(TEST_ALBUM_ID);
 
